@@ -19,7 +19,7 @@ A fun and engaging treasure hunting game built with Flutter where players explor
 </div>
 
 ## 🎥 Gameplay Demo
-![video-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/ccac4a26-b48a-4c7d-9aa1-b4c937ddcd46)
+![video-ezgif com-video-to-gif-converter (1)](https://github.com/user-attachments/assets/51b73c16-b97d-4aab-bc8b-e5a620695550)
 
 ## 🚀 Getting Started
 
