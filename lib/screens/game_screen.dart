@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../models/game_state.dart';
-import '../widgets/pixel_button.dart';
+import '../widgets/d_pad_button.dart';
+import '../widgets/pixel_treasure.dart';
+import '../widgets/pixel_player.dart';
 import 'end_screen.dart';
 
 class GameScreen extends StatefulWidget {
@@ -57,62 +59,99 @@ class _GameScreenState extends State<GameScreen> {
             ),
             Expanded(
               child: Center(
-                child: GridView.builder(
-                  padding: const EdgeInsets.all(16),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 5,
-                    mainAxisSpacing: 4,
-                    crossAxisSpacing: 4,
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white24, width: 2),
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  itemCount: 25,
-                  itemBuilder: (context, index) {
-                    final x = index % 5;
-                    final y = index ~/ 5;
-                    final isPlayer =
-                        x == gameState.playerX && y == gameState.playerY;
-                    final isTreasure =
-                        x == gameState.treasureX && y == gameState.treasureY;
+                  margin: const EdgeInsets.all(16),
+                  child: GridView.builder(
+                    padding: const EdgeInsets.all(4),
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 5,
+                      mainAxisSpacing: 4,
+                      crossAxisSpacing: 4,
+                    ),
+                    itemCount: 25,
+                    itemBuilder: (context, index) {
+                      final x = index % 5;
+                      final y = index ~/ 5;
+                      final isPlayer =
+                          x == gameState.playerX && y == gameState.playerY;
+                      final isTreasure =
+                          x == gameState.treasureX && y == gameState.treasureY;
 
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: isPlayer
-                            ? Colors.red
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: Colors.green[900],
+                          border: Border.all(
+                            color: Colors.green[800]!,
+                            width: 1,
+                          ),
+                        ),
+                        child: isPlayer
+                            ? const PixelPlayer()
                             : isTreasure
-                                ? Colors.yellow
-                                : Colors.green[900],
-                      ),
-                    );
-                  },
+                                ? const PixelTreasure()
+                                : null,
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
+              child: Stack(
+                alignment: Alignment.center,
                 children: [
-                  PixelButton(
-                    text: 'UP',
-                    onPressed: () => _move('up'),
+                  // D-pad background
+                  Container(
+                    width: 180,
+                    height: 180,
+                    decoration: BoxDecoration(
+                      color: Colors.black87,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white24, width: 2),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white.withOpacity(0.1),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                        ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  // D-pad buttons
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      PixelButton(
-                        text: 'LEFT',
-                        onPressed: () => _move('left'),
+                      DPadButton(
+                        direction: 'up',
+                        onPressed: () => _move('up'),
                       ),
-                      const SizedBox(width: 8),
-                      PixelButton(
-                        text: 'RIGHT',
-                        onPressed: () => _move('right'),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          DPadButton(
+                            direction: 'left',
+                            onPressed: () => _move('left'),
+                          ),
+                          const SizedBox(width: 60),
+                          DPadButton(
+                            direction: 'right',
+                            onPressed: () => _move('right'),
+                          ),
+                        ],
+                      ),
+                      DPadButton(
+                        direction: 'down',
+                        onPressed: () => _move('down'),
                       ),
                     ],
-                  ),
-                  const SizedBox(height: 8),
-                  PixelButton(
-                    text: 'DOWN',
-                    onPressed: () => _move('down'),
                   ),
                 ],
               ),
