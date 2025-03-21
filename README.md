@@ -2,8 +2,6 @@
 
 A fun and engaging treasure hunting game built with Flutter where players explore and search for hidden treasures.
 
-![Game Screenshot](assets/images/ss2.png)
-
 ## 🎮 Game Features
 
 - Interactive treasure hunting gameplay
@@ -21,8 +19,7 @@ A fun and engaging treasure hunting game built with Flutter where players explor
 </div>
 
 ## 🎥 Gameplay Demo
-
-[![Gameplay Video](assets/images/ss2.png)](assets/video.mov)
+![video-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/ccac4a26-b48a-4c7d-9aa1-b4c937ddcd46)
 
 ## 🚀 Getting Started
 
