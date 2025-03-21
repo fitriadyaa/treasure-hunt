@@ -1,4 +1,4 @@
-# huntsure
+# A GAME FIND TREASURE
 
 A new Flutter project.
 
